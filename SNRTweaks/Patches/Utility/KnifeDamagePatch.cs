@@ -5,7 +5,7 @@ namespace SNRTweaks.Patches.Utility
     [HarmonyPatch]
     public class KnifeDamagePatch
     {
-        public static float defaultKnifeDamage;
+        internal static float defaultKnifeDamage;
 
         [HarmonyPatch(typeof(PlayerTool), nameof(PlayerTool.Awake)), HarmonyPostfix]
         private static void KnifeAwake_PostFix(PlayerTool __instance)
@@ -29,7 +29,7 @@ namespace SNRTweaks.Patches.Utility
             }
         }
 
-        public static void ResetKnifeValues(Knife knife)
+        private static void ResetKnifeValues(Knife knife)
         {
             knife.damage = defaultKnifeDamage;
         }

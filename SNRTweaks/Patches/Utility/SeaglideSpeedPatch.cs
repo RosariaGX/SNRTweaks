@@ -5,11 +5,11 @@ namespace SNRTweaks.Patches.Utility
     [HarmonyPatch]
     public class SeaglideSpeedPatch
     {
-        private static float defaultseaglideForwardMaxSpeed;
-        private static float defaultseaglideBackwardMaxSpeed;
-        private static float defaultseaglideStrafeMaxSpeed;
-        private static float defaultseaglideVerticalMaxSpeed;
-        private static float defaultseaglideWaterAcceleration;
+        internal static float defaultseaglideForwardMaxSpeed;
+        internal static float defaultseaglideBackwardMaxSpeed;
+        internal static float defaultseaglideStrafeMaxSpeed;
+        internal static float defaultseaglideVerticalMaxSpeed;
+        internal static float defaultseaglideWaterAcceleration;
 
         [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Start)), HarmonyPostfix]
         private static void SeaglideStart_Postfix(PlayerController __instance)
@@ -31,7 +31,7 @@ namespace SNRTweaks.Patches.Utility
         }
 
         [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Update)), HarmonyPostfix]
-        public static void SeaglideUpdate_PostFix(PlayerController __instance)
+        private static void SeaglideUpdate_PostFix(PlayerController __instance)
         {
             if (__instance is PlayerController seaglide && Plugin.Options.wasSeaglideSliderChanged.Equals(true))
             {
@@ -46,7 +46,7 @@ namespace SNRTweaks.Patches.Utility
             }
         } 
 
-        public static void ResetSeaglideValues(PlayerController seaglide)
+        private static void ResetSeaglideValues(PlayerController seaglide)
         {
             seaglide.seaglideForwardMaxSpeed = defaultseaglideForwardMaxSpeed;
             seaglide.seaglideBackwardMaxSpeed = defaultseaglideBackwardMaxSpeed;

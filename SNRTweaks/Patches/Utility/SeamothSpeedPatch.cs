@@ -6,10 +6,10 @@ namespace SNRTweaks.Patches.Utility
     [HarmonyPatch]
     public class SeamothSpeedPatch
     {
-        private static float defaultForwardForce;
-        private static float defaultBackwardsForce;
-        private static float defaultSidewaysForce;
-        private static float defaultVerticalForce;
+        internal static float defaultForwardForce;
+        internal static float defaultBackwardsForce;
+        internal static float defaultSidewaysForce;
+        internal static float defaultVerticalForce;
 
         [HarmonyPatch(typeof(Vehicle), nameof(Vehicle.Awake)), HarmonyPostfix]
         private static void SeamothAwake_PostFix(Vehicle __instance) 

@@ -21,7 +21,7 @@ namespace SNRTweaks.Config
         [Slider("Seamoth Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Seamoth's speed will be multiplied by."), OnChange(nameof(SeamothSpeedSliderChangeEvent))]
         public float seamothSpeedMultiplier = 1.0f;
 
-        public void SeaglideSpeedSliderChangeEvent(SliderChangedEventArgs e)
+        private void SeaglideSpeedSliderChangeEvent(SliderChangedEventArgs e)
         {
             seaglideSpeedMultiplier = e.Value;
             wasSeaglideSliderChanged = true;
