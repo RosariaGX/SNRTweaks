@@ -14,7 +14,7 @@ namespace SNRTweaks.Patches.Utility
 
 
         [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Start)), HarmonyPostfix]
-        private static void seaglideSpeedStart_Postfix(PlayerController __instance)
+        private static void SeaglideStart_Postfix(PlayerController __instance)
         {
             if (__instance is PlayerController seaglide)
             {
@@ -35,7 +35,7 @@ namespace SNRTweaks.Patches.Utility
         }
 
         [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Update)), HarmonyPostfix]
-        public static void seaglideSpeedUpdate_PostFix(PlayerController __instance)
+        public static void SeaglideUpdate_PostFix(PlayerController __instance)
         {
             if (__instance is PlayerController seaglide && Plugin.Options.wasSeaglideSliderChanged.Equals(true))
             {

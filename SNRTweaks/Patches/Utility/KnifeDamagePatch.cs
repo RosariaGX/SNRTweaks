@@ -8,7 +8,7 @@ namespace SNRTweaks.Patches.Utility
         public static float defaultKnifeDamage;
 
         [HarmonyPatch(typeof(PlayerTool), nameof(PlayerTool.Awake)), HarmonyPostfix]
-        private static void KnifeDamageAwake_PostFix(PlayerTool __instance)
+        private static void KnifeAwake_PostFix(PlayerTool __instance)
         {
             if (__instance is Knife knife)
             {
@@ -18,18 +18,18 @@ namespace SNRTweaks.Patches.Utility
         }
 
         [HarmonyPatch(typeof(Knife), nameof(Knife.OnToolUseAnim)), HarmonyPostfix]
-        private static void KnifeDamageUpdate(Knife __instance)
+        private static void KnifeUpdate_PostFix(Knife __instance)
         {
             if (Plugin.Options.wasKnifeSliderChanged.Equals(true))
             {
-                ResetKnifeDamage(__instance);
+                ResetKnifeValues(__instance);
                 __instance.damage *= Plugin.Options.knifeDamageMultiplier;
                 Plugin.Logger.LogInfo($"Knife Damage Multiplier Updated to: {Plugin.Options.knifeDamageMultiplier}");
                 Plugin.Options.wasKnifeSliderChanged = false;
             }
         }
 
-        public static void ResetKnifeDamage(Knife knife)
+        public static void ResetKnifeValues(Knife knife)
         {
             knife.damage = defaultKnifeDamage;
         }
