@@ -34,7 +34,7 @@ namespace SNRTweaks.Patches.Utility
         [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Update)), HarmonyPostfix]
         public static void seaglideSpeedUpdate_PostFix(PlayerController __instance)
         {
-            if (__instance is PlayerController seaglide && Plugin.Options.wasSliderChanged.Equals(true))
+            if (__instance is PlayerController seaglide && Plugin.Options.wasSeaglideSliderChanged.Equals(true))
             {
                 ResetSeaglideValues(seaglide);
 
@@ -43,7 +43,7 @@ namespace SNRTweaks.Patches.Utility
                 seaglide.seaglideStrafeMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
                 seaglide.seaglideVerticalMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
                 seaglide.seaglideWaterAcceleration *= Plugin.Options.seaglideSpeedMultiplier;
-                Plugin.Options.wasSliderChanged = false;
+                Plugin.Options.wasSeaglideSliderChanged = false;
             }
         } 
 
