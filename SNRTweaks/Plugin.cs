@@ -4,7 +4,6 @@ using BepInEx.Logging;
 using HarmonyLib;
 using Nautilus.Handlers;
 using SNRTweaks.Config;
-using SNRTweaks.Items.Equipment;
 
 namespace SNRTweaks;
 
@@ -23,17 +22,9 @@ public class Plugin : BaseUnityPlugin
 
         // set project-scoped logger instance
         Logger = base.Logger;
-        
-        // Initialize custom prefabs
-        InitializePrefabs();
 
         // register harmony patches, if there are any
         Harmony.CreateAndPatchAll(Assembly, $"{PluginInfo.PLUGIN_GUID}");
         Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
-    }
-
-    private void InitializePrefabs()
-    {
-        
     }
 }

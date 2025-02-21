@@ -1,14 +1,7 @@
-﻿using HarmonyLib;
-using Nautilus.Extensions;
-using Nautilus.Json;
+﻿using Nautilus.Json;
 using Nautilus.Options;
 using Nautilus.Options.Attributes;
-using SNRTweaks.Patches.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SNRTweaks.Config
 {
