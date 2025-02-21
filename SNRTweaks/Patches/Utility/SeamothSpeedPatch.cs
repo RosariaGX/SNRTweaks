@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using UnityEngine;
 
 namespace SNRTweaks.Patches.Utility
 {
@@ -28,18 +29,21 @@ namespace SNRTweaks.Patches.Utility
         }
 
         [HarmonyPatch(typeof(SeaMoth), nameof(SeaMoth.Update)), HarmonyPostfix]
-        private static void SeamothUpdate_PostFix(SeaMoth seamoth)
+        private static void SeamothUpdate_PostFix()
         {
-            if (Plugin.Options.wasSeamothSliderChanged.Equals(true))
+            if (Plugin.Options.wasSeamothSliderChanged.Equals(true)) 
             {
-                ResetSeamothValues(seamoth);
+                foreach (var seamoths in GameObject.FindObjectsOfType<SeaMoth>())
+                {
+                    ResetSeamothValues(seamoths);
 
-                seamoth.forwardForce *= Plugin.Options.seamothSpeedMultiplier;
-                seamoth.backwardForce *= Plugin.Options.seamothSpeedMultiplier;
-                seamoth.sidewardForce *= Plugin.Options.seamothSpeedMultiplier;
-                seamoth.verticalForce *= Plugin.Options.seamothSpeedMultiplier;
-
-                Plugin.Options.wasSeamothSliderChanged = false;
+                    seamoths.forwardForce *= Plugin.Options.seamothSpeedMultiplier;
+                    seamoths.backwardForce *= Plugin.Options.seamothSpeedMultiplier;
+                    seamoths.sidewardForce *= Plugin.Options.seamothSpeedMultiplier;
+                    seamoths.verticalForce *= Plugin.Options.seamothSpeedMultiplier;
+                    Plugin.Logger.LogInfo($"Updated Seamoth Speed: {Plugin.Options.seamothSpeedMultiplier}");
+                    Plugin.Options.wasSeamothSliderChanged = false;
+                }
             }
         }
 

@@ -10,8 +10,6 @@ namespace SNRTweaks.Patches.Utility
         private static float defaultseaglideStrafeMaxSpeed;
         private static float defaultseaglideVerticalMaxSpeed;
         private static float defaultseaglideWaterAcceleration;
-        private static float defaultseaglideDrag;
-
 
         [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Start)), HarmonyPostfix]
         private static void SeaglideStart_Postfix(PlayerController __instance)
@@ -23,14 +21,12 @@ namespace SNRTweaks.Patches.Utility
                 defaultseaglideStrafeMaxSpeed = seaglide.seaglideStrafeMaxSpeed;
                 defaultseaglideVerticalMaxSpeed = seaglide.seaglideVerticalMaxSpeed;
                 defaultseaglideWaterAcceleration = seaglide.seaglideWaterAcceleration;
-                defaultseaglideDrag = seaglide.seaglideSwimDrag;
 
                 seaglide.seaglideForwardMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
                 seaglide.seaglideBackwardMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
                 seaglide.seaglideStrafeMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
                 seaglide.seaglideVerticalMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
                 seaglide.seaglideWaterAcceleration *= Plugin.Options.seaglideSpeedMultiplier;
-                seaglide.seaglideSwimDrag *= Plugin.Options.seaglideSpeedMultiplier;
             }
         }
 
@@ -46,14 +42,12 @@ namespace SNRTweaks.Patches.Utility
                 seaglide.seaglideStrafeMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
                 seaglide.seaglideVerticalMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
                 seaglide.seaglideWaterAcceleration *= Plugin.Options.seaglideSpeedMultiplier;
-                seaglide.seaglideSwimDrag *= Plugin.Options.seaglideSpeedMultiplier;
                 Plugin.Options.wasSeaglideSliderChanged = false;
             }
         } 
 
         public static void ResetSeaglideValues(PlayerController seaglide)
         {
-            seaglide.seaglideSwimDrag = defaultseaglideDrag;
             seaglide.seaglideForwardMaxSpeed = defaultseaglideForwardMaxSpeed;
             seaglide.seaglideBackwardMaxSpeed = defaultseaglideBackwardMaxSpeed;
             seaglide.seaglideStrafeMaxSpeed = defaultseaglideStrafeMaxSpeed;
