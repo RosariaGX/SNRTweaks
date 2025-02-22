@@ -20,18 +20,14 @@ namespace SNRTweaks.Patches.Utility
             defaultseaglideStrafeMaxSpeed = __instance.seaglideStrafeMaxSpeed;
             defaultseaglideVerticalMaxSpeed = __instance.seaglideVerticalMaxSpeed;
             defaultseaglideWaterAcceleration = __instance.seaglideWaterAcceleration;
-        }
 
-        [HarmonyPatch(typeof(PlayerTool), nameof(PlayerTool.OnDraw)), HarmonyPrefix]
-        private static void SeaglideOnDraw_Prefix(PlayerTool __instance)
-        {
-            var playerController = Player.main?.playerController;
+            
 
-            playerController.seaglideForwardMaxSpeed = SeaglideSpeedPatch.defaultseaglideForwardMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
-            playerController.seaglideBackwardMaxSpeed = SeaglideSpeedPatch.defaultseaglideBackwardMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
-            playerController.seaglideStrafeMaxSpeed = SeaglideSpeedPatch.defaultseaglideStrafeMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
-            playerController.seaglideVerticalMaxSpeed = SeaglideSpeedPatch.defaultseaglideVerticalMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
-            playerController.seaglideWaterAcceleration = SeaglideSpeedPatch.defaultseaglideWaterAcceleration * Plugin.Options.seaglideSpeedMultiplier;
+            __instance.seaglideForwardMaxSpeed = SeaglideSpeedPatch.defaultseaglideForwardMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
+            __instance.seaglideBackwardMaxSpeed = SeaglideSpeedPatch.defaultseaglideBackwardMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
+            __instance.seaglideStrafeMaxSpeed = SeaglideSpeedPatch.defaultseaglideStrafeMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
+            __instance.seaglideVerticalMaxSpeed = SeaglideSpeedPatch.defaultseaglideVerticalMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
+            __instance.seaglideWaterAcceleration = SeaglideSpeedPatch.defaultseaglideWaterAcceleration * Plugin.Options.seaglideSpeedMultiplier;
             Player.main.UpdateMotorMode();
         }
     }
