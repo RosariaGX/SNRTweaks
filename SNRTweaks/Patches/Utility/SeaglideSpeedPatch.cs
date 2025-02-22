@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SNRTweaks.Patches.Utility
 {
     [HarmonyPatch]
-    public class SeaglideSpeedPatch : MonoBehaviour
+    public class SeaglideSpeedPatch
     {
         public static float defaultseaglideForwardMaxSpeed;
         public static float defaultseaglideBackwardMaxSpeed;
@@ -20,8 +20,6 @@ namespace SNRTweaks.Patches.Utility
             defaultseaglideStrafeMaxSpeed = __instance.seaglideStrafeMaxSpeed;
             defaultseaglideVerticalMaxSpeed = __instance.seaglideVerticalMaxSpeed;
             defaultseaglideWaterAcceleration = __instance.seaglideWaterAcceleration;
-
-            
 
             __instance.seaglideForwardMaxSpeed = SeaglideSpeedPatch.defaultseaglideForwardMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
             __instance.seaglideBackwardMaxSpeed = SeaglideSpeedPatch.defaultseaglideBackwardMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
