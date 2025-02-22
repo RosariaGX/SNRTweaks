@@ -1,14 +1,13 @@
 ﻿using Nautilus.Json;
 using Nautilus.Options;
 using Nautilus.Options.Attributes;
-
+using SNRTweaks.Patches.Utility;
 
 namespace SNRTweaks.Config
 {
     [Menu("SNRTweaks")]
     public class MenuOptions : ConfigFile
     {
-        public bool wasSeaglideSliderChanged = false;
         public bool wasKnifeSliderChanged = false;
         public bool wasSeamothSliderChanged = false;
 
@@ -23,8 +22,18 @@ namespace SNRTweaks.Config
 
         private void SeaglideSpeedSliderChangeEvent(SliderChangedEventArgs e)
         {
-            seaglideSpeedMultiplier = e.Value;
-            wasSeaglideSliderChanged = true;
+            var playerController = Player.main?.playerController;
+
+            if (playerController == null) { return; } 
+
+            playerController.seaglideForwardMaxSpeed = SeaglideSpeedPatch.defaultseaglideForwardMaxSpeed * seaglideSpeedMultiplier;
+            playerController.seaglideBackwardMaxSpeed = SeaglideSpeedPatch.defaultseaglideBackwardMaxSpeed * seaglideSpeedMultiplier;
+            playerController.seaglideStrafeMaxSpeed = SeaglideSpeedPatch.defaultseaglideStrafeMaxSpeed * seaglideSpeedMultiplier;
+            playerController.seaglideVerticalMaxSpeed = SeaglideSpeedPatch.defaultseaglideVerticalMaxSpeed * seaglideSpeedMultiplier;
+            playerController.seaglideWaterAcceleration = SeaglideSpeedPatch.defaultseaglideWaterAcceleration * seaglideSpeedMultiplier;
+            Player.main.SetMotorMode(Player.MotorMode.Dive);
+            Player.main.UpdateMotorMode();
+
         }
 
         private void KnifeDamageSliderChangeEvent(SliderChangedEventArgs e)

@@ -11,21 +11,18 @@ namespace SNRTweaks.Patches.Utility
         internal static float defaultSidewaysForce;
         internal static float defaultVerticalForce;
 
-        [HarmonyPatch(typeof(Vehicle), nameof(Vehicle.Awake)), HarmonyPostfix]
-        private static void SeamothAwake_PostFix(Vehicle __instance) 
+        [HarmonyPatch(typeof(SeaMoth), nameof(SeaMoth.Awake)), HarmonyPostfix]
+        private static void SeamothAwake_PostFix(SeaMoth __instance) 
         {
-            if (__instance is SeaMoth seamoth)
-            {
-                defaultForwardForce = seamoth.forwardForce;
-                defaultBackwardsForce = seamoth.backwardForce;
-                defaultSidewaysForce = seamoth.sidewardForce;
-                defaultVerticalForce = seamoth.verticalForce;
+            defaultForwardForce = __instance.forwardForce;
+            defaultBackwardsForce = __instance.backwardForce;
+            defaultSidewaysForce = __instance.sidewardForce;
+            defaultVerticalForce = __instance.verticalForce;
 
-                seamoth.forwardForce *= Plugin.Options.seamothSpeedMultiplier;
-                seamoth.backwardForce *= Plugin.Options.seamothSpeedMultiplier;
-                seamoth.sidewardForce *= Plugin.Options.seamothSpeedMultiplier;
-                seamoth.verticalForce *= Plugin.Options.seamothSpeedMultiplier;
-            }
+            __instance.forwardForce *= Plugin.Options.seamothSpeedMultiplier;
+            __instance.backwardForce *= Plugin.Options.seamothSpeedMultiplier;
+            __instance.sidewardForce *= Plugin.Options.seamothSpeedMultiplier;
+            __instance.verticalForce *= Plugin.Options.seamothSpeedMultiplier;
         }
 
         [HarmonyPatch(typeof(SeaMoth), nameof(SeaMoth.Update)), HarmonyPostfix]
@@ -47,12 +44,12 @@ namespace SNRTweaks.Patches.Utility
             }
         }
 
-        private static void ResetSeamothValues(SeaMoth seamoth)
+        private static void ResetSeamothValues(SeaMoth __instance)
         {
-            seamoth.forwardForce = defaultForwardForce;
-            seamoth.backwardForce = defaultBackwardsForce;
-            seamoth.sidewardForce = defaultSidewaysForce;
-            seamoth.verticalForce = defaultVerticalForce;
+            __instance.forwardForce = defaultForwardForce;
+            __instance.backwardForce = defaultBackwardsForce;
+            __instance.sidewardForce = defaultSidewaysForce;
+            __instance.verticalForce = defaultVerticalForce;
         }
     }
 }

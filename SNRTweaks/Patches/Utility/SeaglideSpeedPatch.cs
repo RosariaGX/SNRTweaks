@@ -1,58 +1,38 @@
 ﻿using HarmonyLib;
+using UnityEngine;
 
 namespace SNRTweaks.Patches.Utility
 {
     [HarmonyPatch]
-    public class SeaglideSpeedPatch
+    public class SeaglideSpeedPatch : MonoBehaviour
     {
-        internal static float defaultseaglideForwardMaxSpeed;
-        internal static float defaultseaglideBackwardMaxSpeed;
-        internal static float defaultseaglideStrafeMaxSpeed;
-        internal static float defaultseaglideVerticalMaxSpeed;
-        internal static float defaultseaglideWaterAcceleration;
+        public static float defaultseaglideForwardMaxSpeed;
+        public static float defaultseaglideBackwardMaxSpeed;
+        public static float defaultseaglideStrafeMaxSpeed;
+        public static float defaultseaglideVerticalMaxSpeed;
+        public static float defaultseaglideWaterAcceleration;
 
         [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Start)), HarmonyPostfix]
         private static void SeaglideStart_Postfix(PlayerController __instance)
         {
-            if (__instance is PlayerController seaglide)
-            {
-                defaultseaglideForwardMaxSpeed = seaglide.seaglideForwardMaxSpeed;
-                defaultseaglideBackwardMaxSpeed = seaglide.seaglideBackwardMaxSpeed;
-                defaultseaglideStrafeMaxSpeed = seaglide.seaglideStrafeMaxSpeed;
-                defaultseaglideVerticalMaxSpeed = seaglide.seaglideVerticalMaxSpeed;
-                defaultseaglideWaterAcceleration = seaglide.seaglideWaterAcceleration;
-
-                seaglide.seaglideForwardMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
-                seaglide.seaglideBackwardMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
-                seaglide.seaglideStrafeMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
-                seaglide.seaglideVerticalMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
-                seaglide.seaglideWaterAcceleration *= Plugin.Options.seaglideSpeedMultiplier;
-            }
+            defaultseaglideForwardMaxSpeed = __instance.seaglideForwardMaxSpeed;
+            defaultseaglideBackwardMaxSpeed = __instance.seaglideBackwardMaxSpeed;
+            defaultseaglideStrafeMaxSpeed = __instance.seaglideStrafeMaxSpeed;
+            defaultseaglideVerticalMaxSpeed = __instance.seaglideVerticalMaxSpeed;
+            defaultseaglideWaterAcceleration = __instance.seaglideWaterAcceleration;
         }
 
-        [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Update)), HarmonyPostfix]
-        private static void SeaglideUpdate_PostFix(PlayerController __instance)
+        [HarmonyPatch(typeof(PlayerTool), nameof(PlayerTool.OnDraw)), HarmonyPrefix]
+        private static void SeaglideOnDraw_Prefix(PlayerTool __instance)
         {
-            if (__instance is PlayerController seaglide && Plugin.Options.wasSeaglideSliderChanged.Equals(true))
-            {
-                ResetSeaglideValues(seaglide);
+            var playerController = Player.main?.playerController;
 
-                seaglide.seaglideForwardMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
-                seaglide.seaglideBackwardMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
-                seaglide.seaglideStrafeMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
-                seaglide.seaglideVerticalMaxSpeed *= Plugin.Options.seaglideSpeedMultiplier;
-                seaglide.seaglideWaterAcceleration *= Plugin.Options.seaglideSpeedMultiplier;
-                Plugin.Options.wasSeaglideSliderChanged = false;
-            }
-        } 
-
-        private static void ResetSeaglideValues(PlayerController seaglide)
-        {
-            seaglide.seaglideForwardMaxSpeed = defaultseaglideForwardMaxSpeed;
-            seaglide.seaglideBackwardMaxSpeed = defaultseaglideBackwardMaxSpeed;
-            seaglide.seaglideStrafeMaxSpeed = defaultseaglideStrafeMaxSpeed;
-            seaglide.seaglideVerticalMaxSpeed = defaultseaglideVerticalMaxSpeed;
-            seaglide.seaglideWaterAcceleration = defaultseaglideWaterAcceleration;
+            playerController.seaglideForwardMaxSpeed = SeaglideSpeedPatch.defaultseaglideForwardMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
+            playerController.seaglideBackwardMaxSpeed = SeaglideSpeedPatch.defaultseaglideBackwardMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
+            playerController.seaglideStrafeMaxSpeed = SeaglideSpeedPatch.defaultseaglideStrafeMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
+            playerController.seaglideVerticalMaxSpeed = SeaglideSpeedPatch.defaultseaglideVerticalMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
+            playerController.seaglideWaterAcceleration = SeaglideSpeedPatch.defaultseaglideWaterAcceleration * Plugin.Options.seaglideSpeedMultiplier;
+            Player.main.UpdateMotorMode();
         }
     }
 }
