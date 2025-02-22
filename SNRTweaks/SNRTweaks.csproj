@@ -34,28 +34,28 @@
 	<Import Project="GameDir.targets" />
 
 	<PropertyGroup>
-		<PluginsDir>$(GameDir)\BepInEx\plugins</PluginsDir>
+		<PluginsDir2>$(GameDir2)\BepInEx\plugins</PluginsDir2>
 	</PropertyGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;$(PluginsDir)\$(TargetName)&quot;" />
+		<Exec Command="copy /Y &quot;$(TargetPath)&quot; &quot;$(PluginsDir2)\$(TargetName)&quot;" />
 	</Target>
 
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>D:\SteamLibrary\steamapps\common\Subnautica\BepInEx\core\0Harmony.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Subnautica\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>D:\SteamLibrary\steamapps\common\Subnautica\BepInEx\core\BepInEx.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Subnautica\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="Nautilus">
-      <HintPath>D:\SteamLibrary\steamapps\common\Subnautica\BepInEx\plugins\Nautilus\Nautilus.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Subnautica\BepInEx\plugins\Nautilus\Nautilus.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>D:\SteamLibrary\steamapps\common\Subnautica\Subnautica_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Subnautica\Subnautica_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>D:\SteamLibrary\steamapps\common\Subnautica\Subnautica_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Subnautica\Subnautica_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
 
