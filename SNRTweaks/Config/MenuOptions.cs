@@ -1,7 +1,9 @@
 ﻿using Nautilus.Json;
 using Nautilus.Options;
 using Nautilus.Options.Attributes;
+using SNRTweaks.Patches.Players;
 using SNRTweaks.Patches.Utility;
+using System.ComponentModel;
 
 namespace SNRTweaks.Config
 {
@@ -14,7 +16,7 @@ namespace SNRTweaks.Config
         [Slider("Swim Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Player's swim speed will be multiplied by."), OnChange(nameof(SwimSpeedSliderChangeEvent))]
         public float swimSpeedMultiplier = 1.0f;
         
-        [Slider("Run Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Player's swim speed will be multiplied by."), OnChange(nameof(RunSpeedSliderChangeEvent))]
+        [Slider("Run Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Player's Run speed will be multiplied by."), OnChange(nameof(RunSpeedSliderChangeEvent))]
         public float walkSpeedMultiplier = 1.0f;
 
         [Slider("Seaglide Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Seaglide's speed will be multiplied by."), OnChange(nameof(SeaglideSpeedSliderChangeEvent))]
@@ -25,6 +27,9 @@ namespace SNRTweaks.Config
 
         [Slider("Seamoth Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Seamoth's speed will be multiplied by."), OnChange(nameof(SeamothSpeedSliderChangeEvent))]
         public float seamothSpeedMultiplier = 1.0f;
+
+        [Toggle("Disabled Bleeders", Tooltip = "This is an option to Enable or Disable all Bleeders from the game"), OnChange(nameof(BleedersToggleChangeEvent))]
+        public bool areBleedersDisabled = false;
 
         private void SwimSpeedSliderChangeEvent(SliderChangedEventArgs e)
         {
@@ -76,6 +81,11 @@ namespace SNRTweaks.Config
         {
             seamothSpeedMultiplier = e.Value;
             wasSeamothSliderChanged = true;
+        }
+
+        private void BleedersToggleChangeEvent(ToggleChangedEventArgs e)
+        {
+            areBleedersDisabled = e.Value;
         }
     }
 }

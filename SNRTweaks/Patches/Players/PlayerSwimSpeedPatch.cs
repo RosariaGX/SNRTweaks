@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace SNRTweaks.Patches.Utility
+namespace SNRTweaks.Patches.Players
 {
     [HarmonyPatch]
     public class PlayerSwimSpeedPatch
