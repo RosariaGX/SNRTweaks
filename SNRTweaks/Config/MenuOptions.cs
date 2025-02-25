@@ -27,8 +27,11 @@ namespace SNRTweaks.Config
         [Slider("Seamoth Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Seamoth's speed will be multiplied by."), OnChange(nameof(SeamothSpeedSliderChangeEvent))]
         public float seamothSpeedMultiplier = 1.0f;
 
-        [Toggle("Disable Bleeders", Tooltip = "This is an option to Enable or Disable all Bleeders from the game"), OnChange(nameof(BleedersToggleChangeEvent))]
+        [Toggle("Disable Bleeders", Tooltip = "This is an option to Enable or Disable all Bleeders from the game, You may need to reload save to take effect"), OnChange(nameof(BleedersToggleChangeEvent))]
         public bool areBleedersDisabled = false;
+
+        [Toggle("Disable Warpers", Tooltip = "This is an option to Enable or Disable all Warpers from the game, You may need to reload save to take effect"), OnChange(nameof(WarpersToggleChangeEvent))]
+        public bool areWarpersDisabled = false;
 
         private void SwimSpeedSliderChangeEvent(SliderChangedEventArgs e)
         {
@@ -83,6 +86,10 @@ namespace SNRTweaks.Config
         }
 
         private void BleedersToggleChangeEvent(ToggleChangedEventArgs e)
+        {
+            areBleedersDisabled = e.Value;
+        }
+        private void WarpersToggleChangeEvent(ToggleChangedEventArgs e)
         {
             areBleedersDisabled = e.Value;
         }
