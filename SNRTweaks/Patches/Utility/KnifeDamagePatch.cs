@@ -20,7 +20,7 @@ namespace SNRTweaks.Patches.Utility
         [HarmonyPatch(typeof(Knife), nameof(Knife.OnToolUseAnim)), HarmonyPostfix]
         private static void KnifeUpdate_PostFix(Knife __instance)
         {
-            if (Plugin.Options.wasKnifeSliderChanged.Equals(true))
+            if (Plugin.Options.wasKnifeSliderChanged)
             {
                 __instance.damage = defaultKnifeDamage * Plugin.Options.knifeDamageMultiplier;
                 Plugin.Options.wasKnifeSliderChanged = false;
