@@ -12,7 +12,6 @@ namespace SNRTweaks.Patches.Entities
             if (Plugin.Options.areBleedersDisabled)
             {
                 GameObject.Destroy(__instance.gameObject);
-                Plugin.Logger.LogInfo("Bleeder was destroyed");
             }
         }
     }
