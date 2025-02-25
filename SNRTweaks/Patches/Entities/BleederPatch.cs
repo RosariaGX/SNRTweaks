@@ -1,7 +1,5 @@
 ﻿using HarmonyLib;
-using Nautilus.Extensions;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace SNRTweaks.Patches.Entities
 {
