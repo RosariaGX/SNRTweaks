@@ -32,6 +32,9 @@ namespace SNRTweaks.Config
 
         [Toggle("Disable Warpers", Tooltip = "This is an option to Enable or Disable all Warpers from the game, You may need to reload save to take effect"), OnChange(nameof(WarpersToggleChangeEvent))]
         public bool areWarpersDisabled = false;
+        
+        [Toggle("Disable Reapers", Tooltip = "This is an option to Enable or Disable all Reapers from the game, You may need to reload save to take effect"), OnChange(nameof(ReapersToggleChangeEvent))]
+        public bool areReapersDisabled = false;
 
         private void SwimSpeedSliderChangeEvent(SliderChangedEventArgs e)
         {
@@ -89,9 +92,15 @@ namespace SNRTweaks.Config
         {
             areBleedersDisabled = e.Value;
         }
+
         private void WarpersToggleChangeEvent(ToggleChangedEventArgs e)
         {
             areBleedersDisabled = e.Value;
+        }
+
+        private void ReapersToggleChangeEvent(ToggleChangedEventArgs e)
+        {
+            areReapersDisabled = e.Value;
         }
     }
 }
