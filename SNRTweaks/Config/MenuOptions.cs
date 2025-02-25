@@ -36,6 +36,12 @@ namespace SNRTweaks.Config
         [Toggle("Disable Reapers", Tooltip = "This is an option to Enable or Disable all Reapers from the game, You may need to reload save to take effect"), OnChange(nameof(ReapersToggleChangeEvent))]
         public bool areReapersDisabled = false;
 
+        [Toggle("Disable Seadragons", Tooltip = "This is an option to Enable or Disable all Seadragons from the game, You may need to reload save to take effect"), OnChange(nameof(SeaDragonsToggleChangeEvent))]
+        public bool areSeaDragonsDisabled = false;
+
+        [Toggle("Disable Ghost Leviathans", Tooltip = "This is an option to Enable or Disable all Ghost Leviathans from the game, You may need to reload save to take effect"), OnChange(nameof(GhostLeviathansToggleChangeEvent))]
+        public bool areGhostLeviathansDisabled = false;
+
         [Toggle("Disable Crabsquids", Tooltip = "This is an option to Enable or Disable all Crabsquids from the game (you're welcome RTGames), You may need to reload save to take effect"), OnChange(nameof(CrabsquidsToggleChangeEvent))]
         public bool areCrabsquidsDisabled = false;
 
@@ -104,6 +110,16 @@ namespace SNRTweaks.Config
         private void ReapersToggleChangeEvent(ToggleChangedEventArgs e)
         {
             areReapersDisabled = e.Value;
+        }
+
+        private void SeaDragonsToggleChangeEvent(ToggleChangedEventArgs e)
+        {
+            areSeaDragonsDisabled = e.Value;
+        }
+
+        private void GhostLeviathansToggleChangeEvent(ToggleChangedEventArgs e)
+        {
+            areGhostLeviathansDisabled = e.Value;
         }
 
         private void CrabsquidsToggleChangeEvent(ToggleChangedEventArgs e)
