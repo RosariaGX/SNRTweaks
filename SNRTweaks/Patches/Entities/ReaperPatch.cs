@@ -7,7 +7,7 @@ namespace SNRTweaks.Patches.Entities
     public class ReaperPatch
     {
         [HarmonyPatch(typeof(ReaperLeviathan), nameof(ReaperLeviathan.Start)), HarmonyPrefix]
-        private static void ReaperLeviathanStart_Prefix(Warper __instance)
+        private static void ReaperLeviathanStart_Prefix(ReaperLeviathan __instance)
         {
             if (Plugin.Options.areReapersDisabled)
             {
