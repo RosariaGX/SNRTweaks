@@ -23,7 +23,6 @@ namespace SNRTweaks.Patches.Utility
             if (Plugin.Options.wasKnifeSliderChanged.Equals(true))
             {
                 __instance.damage = defaultKnifeDamage * Plugin.Options.knifeDamageMultiplier;
-                Plugin.Logger.LogInfo($"Knife Damage Multiplier Updated to: {Plugin.Options.knifeDamageMultiplier}");
                 Plugin.Options.wasKnifeSliderChanged = false;
             }
         }
