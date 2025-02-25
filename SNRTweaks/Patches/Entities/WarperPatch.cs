@@ -6,8 +6,8 @@ namespace SNRTweaks.Patches.Entities
     [HarmonyPatch]
     public class WarperPatch
     {
-        [HarmonyPatch(typeof(Warper), nameof(Warper.Start)), HarmonyPrefix]
-        private static void WarperStart_Prefix(Warper __instance)
+        [HarmonyPatch(typeof(WarperSpawner), nameof(WarperSpawner.OnEnable)), HarmonyPrefix]
+        private static void WarperSpawnerOnEnabled_Prefix(WarperSpawner __instance)
         {
             if (Plugin.Options.areWarpersDisabled)
             {

@@ -6,12 +6,12 @@ namespace SNRTweaks.Patches.Entities
     [HarmonyPatch]
     public class CrabsquidPatch
     {
-        [HarmonyPatch(typeof(CrabSquid), nameof(CrabSquid.Start)), HarmonyPrefix]
-        private static void CrabSquidStart_Prefix(CrabSquid __instance)
+        [HarmonyPatch(typeof(Creature), nameof(Creature.Start)), HarmonyPrefix]
+        private static void CrabSquidStart_Prefix(Creature __instance)
         {
-            if (Plugin.Options.areCrabsquidsDisabled)
+            if (Plugin.Options.areCrabsquidsDisabled && __instance is CrabSquid crabSquid)
             {
-                GameObject.Destroy(__instance.gameObject);
+                GameObject.Destroy(crabSquid.gameObject);
             }
         }
     }

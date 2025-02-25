@@ -6,12 +6,12 @@ namespace SNRTweaks.Patches.Entities
     [HarmonyPatch]
     public class ReaperPatch
     {
-        [HarmonyPatch(typeof(ReaperLeviathan), nameof(ReaperLeviathan.Start)), HarmonyPrefix]
-        private static void ReaperLeviathanStart_Prefix(ReaperLeviathan __instance)
+        [HarmonyPatch(typeof(Creature), nameof(Creature.Start)), HarmonyPrefix]
+        private static void ReaperLeviathanStart_Prefix(Creature __instance)
         {
-            if (Plugin.Options.areReapersDisabled)
+            if (Plugin.Options.areReapersDisabled && __instance is ReaperLeviathan reaper)
             {
-                GameObject.Destroy(__instance.gameObject);
+                GameObject.Destroy(reaper.gameObject);
             }
         }
     }
