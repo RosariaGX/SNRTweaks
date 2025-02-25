@@ -36,6 +36,9 @@ namespace SNRTweaks.Config
         [Toggle("Disable Reapers", Tooltip = "This is an option to Enable or Disable all Reapers from the game, You may need to reload save to take effect"), OnChange(nameof(ReapersToggleChangeEvent))]
         public bool areReapersDisabled = false;
 
+        [Toggle("Disable Crabsquids", Tooltip = "This is an option to Enable or Disable all Crabsquids from the game (you're welcome RTGames), You may need to reload save to take effect"), OnChange(nameof(CrabsquidsToggleChangeEvent))]
+        public bool areCrabsquidsDisabled = false;
+
         private void SwimSpeedSliderChangeEvent(SliderChangedEventArgs e)
         {
             var playerController = Player.main?.playerController;
@@ -101,6 +104,11 @@ namespace SNRTweaks.Config
         private void ReapersToggleChangeEvent(ToggleChangedEventArgs e)
         {
             areReapersDisabled = e.Value;
+        }
+
+        private void CrabsquidsToggleChangeEvent(ToggleChangedEventArgs e)
+        {
+            areCrabsquidsDisabled = e.Value;
         }
     }
 }
