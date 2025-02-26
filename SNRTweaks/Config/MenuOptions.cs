@@ -1,4 +1,5 @@
-﻿using Nautilus.Json;
+﻿using Nautilus.Extensions;
+using Nautilus.Json;
 using Nautilus.Options;
 using Nautilus.Options.Attributes;
 using SNRTweaks.Patches.Players;
@@ -11,6 +12,7 @@ namespace SNRTweaks.Config
     {
         public bool wasKnifeSliderChanged = false;
         public bool wasSeamothSliderChanged = false;
+        public bool wasWelderSliderChanged = false;
 
         [Slider("Swim Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Player's swim speed will be multiplied by."), OnChange(nameof(SwimSpeedSliderChangeEvent))]
         public float swimSpeedMultiplier = 1.0f;
@@ -23,6 +25,9 @@ namespace SNRTweaks.Config
 
         [Slider("Knife Damage Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Knife's damage will be multiplied by."), OnChange(nameof(KnifeDamageSliderChangeEvent))]
         public float knifeDamageMultiplier = 1.0f;
+
+        [Slider("Repair Tool Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Repair Tool's speed will be multiplied by."), OnChange(nameof(WelderSpeedSliderChangeEvent))]
+        public float welderSpeedMultiplier = 1.0f;
 
         [Slider("Seamoth Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Seamoth's speed will be multiplied by."), OnChange(nameof(SeamothSpeedSliderChangeEvent))]
         public float seamothSpeedMultiplier = 1.0f;
@@ -89,6 +94,12 @@ namespace SNRTweaks.Config
         {
             knifeDamageMultiplier = e.Value;
             wasKnifeSliderChanged = true;
+        }
+
+        private void WelderSpeedSliderChangeEvent(SliderChangedEventArgs e)
+        {
+            welderSpeedMultiplier = e.Value;
+            wasWelderSliderChanged = true;
         }
 
         private void SeamothSpeedSliderChangeEvent(SliderChangedEventArgs e)
