@@ -3,19 +3,19 @@
 namespace SNRTweaks.Patches.Utility
 {
     [HarmonyPatch]
-    public class SeaglideSpeedPatch
+    internal class SeaglideSpeedPatch
     {
-        public static float defaultseaglideForwardMaxSpeed;
-        public static float defaultseaglideWaterAcceleration;
+        public static float DefaultSeaglideForwardMaxSpeed;
+        public static float DefaultSeaglideWaterAcceleration;
 
         [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Start)), HarmonyPostfix]
-        private static void SeaglideStart_Postfix(PlayerController __instance)
+        private static void SeaglideStart_Postfix(PlayerController instance)
         {
-            defaultseaglideForwardMaxSpeed = __instance.seaglideForwardMaxSpeed;
-            defaultseaglideWaterAcceleration = __instance.seaglideWaterAcceleration;
+            DefaultSeaglideForwardMaxSpeed = instance.seaglideForwardMaxSpeed;
+            DefaultSeaglideWaterAcceleration = instance.seaglideWaterAcceleration;
 
-            __instance.seaglideForwardMaxSpeed = defaultseaglideForwardMaxSpeed * Plugin.Options.seaglideSpeedMultiplier;
-            __instance.seaglideWaterAcceleration = defaultseaglideWaterAcceleration * Plugin.Options.seaglideSpeedMultiplier;
+            instance.seaglideForwardMaxSpeed = DefaultSeaglideForwardMaxSpeed * Plugin.Options.SeaglideSpeedMultiplier;
+            instance.seaglideWaterAcceleration = DefaultSeaglideWaterAcceleration * Plugin.Options.SeaglideSpeedMultiplier;
             Player.main.UpdateMotorMode();  
         }
     }

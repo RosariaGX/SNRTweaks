@@ -3,16 +3,16 @@
 namespace SNRTweaks.Patches.Players
 {
     [HarmonyPatch]
-    public class PlayerRunSpeedPatch
+    internal class PlayerRunSpeedPatch
     {
-        public static float defaultWalkRunForwardSpeed;
+        public static float DefaultWalkRunForwardSpeed;
 
         [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Start)), HarmonyPostfix]
-        private static void PlayerControllerStart_Postfix(PlayerController __instance)
+        private static void PlayerControllerStart_Postfix(PlayerController instance)
         {
-            defaultWalkRunForwardSpeed = __instance.walkRunForwardMaxSpeed;
+            DefaultWalkRunForwardSpeed = instance.walkRunForwardMaxSpeed;
 
-            __instance.swimForwardMaxSpeed = defaultWalkRunForwardSpeed * Plugin.Options.walkSpeedMultiplier;
+            instance.swimForwardMaxSpeed = DefaultWalkRunForwardSpeed * Plugin.Options.WalkSpeedMultiplier;
             Player.main.UpdateMotorMode();
         }
     }

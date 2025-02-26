@@ -4,14 +4,14 @@ using UnityEngine;
 namespace SNRTweaks.Patches.Entities
 {
     [HarmonyPatch]
-    public class BleederPatch
+    internal class BleederPatch
     {
         [HarmonyPatch(typeof(Bleeder), nameof(Bleeder.Start)), HarmonyPrefix]
-        private static void BleederStart_Prefix(Bleeder __instance)
+        private static void BleederStart_Prefix(Bleeder instance)
         {
-            if (Plugin.Options.areBleedersDisabled)
+            if (Plugin.Options.AreBleedersDisabled)
             {
-                GameObject.Destroy(__instance.gameObject);
+                Object.Destroy(instance.gameObject);
             }
         }
     }

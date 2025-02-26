@@ -6,27 +6,27 @@ namespace SNRTweaks.Patches.Vehicles
     [HarmonyPatch]
     public class SeamothSpeedPatch
     {
-        internal static float defaultForwardForce;
+        private static float _defaultForwardForce;
 
         [HarmonyPatch(typeof(SeaMoth), nameof(SeaMoth.Awake)), HarmonyPostfix]
-        private static void SeamothAwake_PostFix(SeaMoth __instance) 
+        private static void SeamothAwake_PostFix(SeaMoth instance) 
         {
-            defaultForwardForce = __instance.forwardForce;
+            _defaultForwardForce = instance.forwardForce;
 
-            __instance.forwardForce *= Plugin.Options.seamothSpeedMultiplier;
+            instance.forwardForce *= Plugin.Options.SeamothSpeedMultiplier;
         }
 
         [HarmonyPatch(typeof(SeaMoth), nameof(SeaMoth.Update)), HarmonyPostfix]
         private static void SeamothUpdate_PostFix()
         {
-            if (Plugin.Options.wasSeamothSliderChanged) 
+            if (Plugin.Options.WasSeamothSliderChanged) 
             {
                 foreach (var seamoths in Object.FindObjectsOfType<SeaMoth>())
                 {
-                    seamoths.forwardForce = defaultForwardForce;
+                    seamoths.forwardForce = _defaultForwardForce;
 
-                    seamoths.forwardForce *= Plugin.Options.seamothSpeedMultiplier;
-                    Plugin.Options.wasSeamothSliderChanged = false;
+                    seamoths.forwardForce *= Plugin.Options.SeamothSpeedMultiplier;
+                    Plugin.Options.WasSeamothSliderChanged = false;
                 }
             }
         }

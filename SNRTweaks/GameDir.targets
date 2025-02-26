@@ -3,6 +3,5 @@
 	<PropertyGroup>
 		<!--If trying to build this project, please make sure the correct directory to your Subnautica folder is listed below:-->
 		<GameDir>D:\SteamLibrary\steamapps\common\Subnautica</GameDir>
-		<GameDir2>C:\Program Files (x86)\Steam\steamapps\common\Subnautica</GameDir2>
 	</PropertyGroup>
 </Project>

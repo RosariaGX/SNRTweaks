@@ -19,7 +19,6 @@ public class Plugin : BaseUnityPlugin
 
     public void Awake()
     {
-
         // set project-scoped logger instance
         Logger = base.Logger;
 

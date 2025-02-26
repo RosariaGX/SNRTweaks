@@ -5,28 +5,31 @@ namespace SNRTweaks.Patches.Players
     [HarmonyPatch]
     internal class PlayerHungerAndWaterPatch
     {
-        private static float defaultWater;
-        private static float defaultHunger;
-        private static bool wasToggled = false;
+        private static float _defaultWater;
+        private static float _defaultHunger;
+        private static bool _wasToggled;
 
         [HarmonyPatch(typeof(Survival), nameof(Survival.UpdateStats)), HarmonyPrefix]
-        private static void PlayerUpdateStats_Prefix(Survival __instance)
+        private static void PlayerUpdateStats_Prefix(Survival instance)
         {
-            defaultWater = __instance.water;
-            defaultHunger = __instance.food;
+            _defaultWater = instance.water;
+            _defaultHunger = instance.food;
 
-            if (Plugin.Options.isWaterAndHungerToggled)
+            if (Plugin.Options.IsWaterAndHungerToggled)
             {
-                __instance.water = defaultWater + 100.0f;
-                __instance.food = defaultHunger + 100.0f;
-                wasToggled = true;
+                instance.water = _defaultWater + 100.0f;
+                instance.food = _defaultHunger + 100.0f;
+                _wasToggled = true;
             } else 
             { 
-                if (wasToggled)
+                if (_wasToggled)
                 {
-                    float newHunger = __instance.food - defaultHunger;
-                    float newWater = __instance.water - defaultWater;
-                    wasToggled = false;
+                    float newHunger = instance.food - _defaultHunger;
+                    float newWater = instance.water - _defaultWater;
+
+                    instance.food = newHunger;
+                    instance.water = newWater;
+                    _wasToggled = false;
                 } else { return;  }
                 return;
             }

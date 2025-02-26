@@ -3,27 +3,27 @@
 namespace SNRTweaks.Patches.Utility
 {
     [HarmonyPatch]
-    public class KnifeDamagePatch
+    internal class KnifeDamagePatch
     {
-        internal static float defaultKnifeDamage;
+        private static float _defaultKnifeDamage;
 
         [HarmonyPatch(typeof(PlayerTool), nameof(PlayerTool.Awake)), HarmonyPostfix]
-        private static void KnifeAwake_PostFix(PlayerTool __instance)
+        private static void KnifeAwake_PostFix(PlayerTool instance)
         {
-            if (__instance is Knife knife)
+            if (instance is Knife knife)
             {
-                defaultKnifeDamage = knife.damage;
-                knife.damage *= Plugin.Options.knifeDamageMultiplier;
+                _defaultKnifeDamage = knife.damage;
+                knife.damage *= Plugin.Options.KnifeDamageMultiplier;
             }
         }
 
         [HarmonyPatch(typeof(Knife), nameof(Knife.OnToolUseAnim)), HarmonyPostfix]
-        private static void KnifeUpdate_PostFix(Knife __instance)
+        private static void KnifeUpdate_PostFix(Knife instance)
         {
-            if (Plugin.Options.wasKnifeSliderChanged)
+            if (Plugin.Options.WasKnifeSliderChanged)
             {
-                __instance.damage = defaultKnifeDamage * Plugin.Options.knifeDamageMultiplier;
-                Plugin.Options.wasKnifeSliderChanged = false;
+                instance.damage = _defaultKnifeDamage * Plugin.Options.KnifeDamageMultiplier;
+                Plugin.Options.WasKnifeSliderChanged = false;
             }
         }
     }

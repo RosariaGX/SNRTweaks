@@ -4,14 +4,14 @@ using UnityEngine;
 namespace SNRTweaks.Patches.Entities
 {
     [HarmonyPatch]
-    public class SeadragonPatch
+    internal class SeadragonPatch
     {
         [HarmonyPatch(typeof(Creature), nameof(Creature.Start)), HarmonyPrefix]
-        private static void SeadragonLeviathanStart_Prefix(Creature __instance)
+        private static void SeadragonLeviathanStart_Prefix(Creature instance)
         {
-            if (Plugin.Options.areSeaDragonsDisabled && __instance is SeaDragon seaDragon)
+            if (Plugin.Options.AreSeaDragonsDisabled && instance is SeaDragon seaDragon)
             {
-                GameObject.Destroy(seaDragon.gameObject);
+                Object.Destroy(seaDragon.gameObject);
             }
         }
     }

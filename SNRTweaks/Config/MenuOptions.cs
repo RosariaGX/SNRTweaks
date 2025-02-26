@@ -10,61 +10,61 @@ namespace SNRTweaks.Config
     [Menu("SNRTweaks")]
     public class MenuOptions : ConfigFile
     {
-        public bool wasKnifeSliderChanged = false;
-        public bool wasSeamothSliderChanged = false;
-        public bool wasWelderSliderChanged = false;
-        public bool wasLaserSliderChanged = false;
+        public bool WasKnifeSliderChanged = false;
+        public bool WasSeamothSliderChanged = false;
+        public bool WasWelderSliderChanged = false;
+        public bool WasLaserSliderChanged = false;
 
         [Slider("Swim Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Player's swim speed will be multiplied by."), OnChange(nameof(SwimSpeedSliderChangeEvent))]
-        public float swimSpeedMultiplier = 1.0f;
+        public float SwimSpeedMultiplier = 1.0f;
         
         [Slider("Run Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Player's Run speed will be multiplied by."), OnChange(nameof(RunSpeedSliderChangeEvent))]
-        public float walkSpeedMultiplier = 1.0f;
+        public float WalkSpeedMultiplier = 1.0f;
 
         [Slider("Seaglide Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Seaglide's speed will be multiplied by."), OnChange(nameof(SeaglideSpeedSliderChangeEvent))]
-        public float seaglideSpeedMultiplier = 1.0f;
+        public float SeaglideSpeedMultiplier = 1.0f;
 
         [Slider("Knife Damage Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Knife's damage will be multiplied by."), OnChange(nameof(KnifeDamageSliderChangeEvent))]
-        public float knifeDamageMultiplier = 1.0f;
+        public float KnifeDamageMultiplier = 1.0f;
 
         [Slider("Repair Tool Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Repair Tool's speed will be multiplied by."), OnChange(nameof(WelderSpeedSliderChangeEvent))]
-        public float welderSpeedMultiplier = 1.0f;
+        public float WelderSpeedMultiplier = 1.0f;
 
         [Slider("Laser Cutter Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Laser Cutter's speed will be multiplied by."), OnChange(nameof(LaserSpeedSliderChangeEvent))]
-        public float laserSpeedMultiplier = 1.0f;
+        public float LaserSpeedMultiplier = 1.0f;
 
         [Slider("Seamoth Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Seamoth's speed will be multiplied by."), OnChange(nameof(SeamothSpeedSliderChangeEvent))]
-        public float seamothSpeedMultiplier = 1.0f;
+        public float SeamothSpeedMultiplier = 1.0f;
 
         [Toggle("Oxygen Cheat", Tooltip = "This is an option to enable or disable the NoOxygen console command"), OnChange(nameof(OxygenCheatToggleChangeEvent))]
-        public bool isNoOxygenToggled = false;
+        public bool IsNoOxygenToggled;
 
         [Toggle("Health Cheat", Tooltip = "This is an option to enable or disable taking damage, Please note that this DOESN'T prevent one shot kills e.g. Reapers eating you or getting killed by the Aurora explosion e.t.c"), OnChange(nameof(HealthCheatToggleChangeEvent))]
-        public bool isHealthCheatToggled = false;
+        public bool IsHealthCheatToggled;
 
         [Toggle("Hunger & Water Cheat", Tooltip = "This is an option to enable or disable hunger and water"), OnChange(nameof(WaterAndHungerCheatToggleChangeEvent))]
-        public bool isWaterAndHungerToggled = false;
+        public bool IsWaterAndHungerToggled;
 
         [Toggle("Disable Bleeders", Tooltip = "This is an option to Enable or Disable all Bleeders from the game, You may need to reload save to take effect"), OnChange(nameof(BleedersToggleChangeEvent))]
-        public bool areBleedersDisabled = false;
+        public bool AreBleedersDisabled;
 
         [Toggle("Disable Lava Larva", Tooltip = "This is an option to Enable or Disable all Lava Larva from the game, You may need to reload save to take effect"), OnChange(nameof(LarvaToggleChangeEvent))]
-        public bool areLarvaDisabled = false;
+        public bool AreLarvaDisabled;
 
         [Toggle("Disable Warpers", Tooltip = "This is an option to Enable or Disable all Warpers from the game, You may need to reload save to take effect"), OnChange(nameof(WarpersToggleChangeEvent))]
-        public bool areWarpersDisabled = false;
+        public bool AreWarpersDisabled = false;
         
         [Toggle("Disable Reapers", Tooltip = "This is an option to Enable or Disable all Reapers from the game, You may need to reload save to take effect"), OnChange(nameof(ReapersToggleChangeEvent))]
-        public bool areReapersDisabled = false;
+        public bool AreReapersDisabled;
 
         [Toggle("Disable Seadragons", Tooltip = "This is an option to Enable or Disable all Seadragons from the game, You may need to reload save to take effect"), OnChange(nameof(SeaDragonsToggleChangeEvent))]
-        public bool areSeaDragonsDisabled = false;
+        public bool AreSeaDragonsDisabled;
 
         [Toggle("Disable Ghost Leviathans", Tooltip = "This is an option to Enable or Disable all Ghost Leviathans from the game, You may need to reload save to take effect"), OnChange(nameof(GhostLeviathansToggleChangeEvent))]
-        public bool areGhostLeviathansDisabled = false;
+        public bool AreGhostLeviathansDisabled;
 
         [Toggle("Disable Crabsquids", Tooltip = "This is an option to Enable or Disable all Crabsquids from the game (you're welcome RTGames), You may need to reload save to take effect"), OnChange(nameof(CrabsquidsToggleChangeEvent))]
-        public bool areCrabsquidsDisabled = false;
+        public bool AreCrabsquidsDisabled;
 
         private void SwimSpeedSliderChangeEvent(SliderChangedEventArgs e)
         {
@@ -72,8 +72,8 @@ namespace SNRTweaks.Config
 
             if (playerController == null) { return; }
 
-            playerController.swimForwardMaxSpeed = PlayerSwimSpeedPatch.defaultSwimForwardSpeed * swimSpeedMultiplier;
-            playerController.swimWaterAcceleration = PlayerSwimSpeedPatch.defaultSwimWaterAcceleration * swimSpeedMultiplier;
+            playerController.swimForwardMaxSpeed = PlayerSwimSpeedPatch.DefaultSwimForwardSpeed * SwimSpeedMultiplier;
+            playerController.swimWaterAcceleration = PlayerSwimSpeedPatch.DefaultSwimWaterAcceleration * SwimSpeedMultiplier;
 
             Player.main.SetMotorMode(Player.MotorMode.Walk);
             Player.main.UpdateMotorMode();
@@ -85,7 +85,7 @@ namespace SNRTweaks.Config
 
             if (playerController == null) { return; }
 
-            playerController.walkRunForwardMaxSpeed = PlayerRunSpeedPatch.defaultWalkRunForwardSpeed * walkSpeedMultiplier;
+            playerController.walkRunForwardMaxSpeed = PlayerRunSpeedPatch.DefaultWalkRunForwardSpeed * WalkSpeedMultiplier;
 
             Player.main.SetMotorMode(Player.MotorMode.Dive);
             Player.main.UpdateMotorMode();
@@ -98,8 +98,8 @@ namespace SNRTweaks.Config
 
             if (playerController == null) { return; } 
 
-            playerController.seaglideForwardMaxSpeed = SeaglideSpeedPatch.defaultseaglideForwardMaxSpeed * seaglideSpeedMultiplier;
-            playerController.seaglideWaterAcceleration = SeaglideSpeedPatch.defaultseaglideWaterAcceleration * seaglideSpeedMultiplier;
+            playerController.seaglideForwardMaxSpeed = SeaglideSpeedPatch.DefaultSeaglideForwardMaxSpeed * SeaglideSpeedMultiplier;
+            playerController.seaglideWaterAcceleration = SeaglideSpeedPatch.DefaultSeaglideWaterAcceleration * SeaglideSpeedMultiplier;
 
             Player.main.SetMotorMode(Player.MotorMode.Dive);
             Player.main.UpdateMotorMode();
@@ -108,76 +108,76 @@ namespace SNRTweaks.Config
 
         private void KnifeDamageSliderChangeEvent(SliderChangedEventArgs e)
         {
-            knifeDamageMultiplier = e.Value;
-            wasKnifeSliderChanged = true;
+            KnifeDamageMultiplier = e.Value;
+            WasKnifeSliderChanged = true;
         }
 
         private void WelderSpeedSliderChangeEvent(SliderChangedEventArgs e)
         {
-            welderSpeedMultiplier = e.Value;
-            wasWelderSliderChanged = true;
+            WelderSpeedMultiplier = e.Value;
+            WasWelderSliderChanged = true;
         }
 
         private void LaserSpeedSliderChangeEvent(SliderChangedEventArgs e)
         {
-            welderSpeedMultiplier = e.Value;
-            wasLaserSliderChanged = true;
+            WelderSpeedMultiplier = e.Value;
+            WasLaserSliderChanged = true;
         }
 
         private void SeamothSpeedSliderChangeEvent(SliderChangedEventArgs e)
         {
-            seamothSpeedMultiplier = e.Value;
-            wasSeamothSliderChanged = true;
+            SeamothSpeedMultiplier = e.Value;
+            WasSeamothSliderChanged = true;
         }
 
         private void OxygenCheatToggleChangeEvent(ToggleChangedEventArgs e)
         {
-            isNoOxygenToggled = e.Value;
+            IsNoOxygenToggled = e.Value;
         }
 
         private void HealthCheatToggleChangeEvent(ToggleChangedEventArgs e)
         {
-            isHealthCheatToggled = e.Value;
+            IsHealthCheatToggled = e.Value;
         }
 
         private void WaterAndHungerCheatToggleChangeEvent(ToggleChangedEventArgs e)
         {
-            isWaterAndHungerToggled = e.Value;
+            IsWaterAndHungerToggled = e.Value;
         }
 
         private void BleedersToggleChangeEvent(ToggleChangedEventArgs e)
         {
-            areBleedersDisabled = e.Value;
+            AreBleedersDisabled = e.Value;
         }
 
         private void LarvaToggleChangeEvent(ToggleChangedEventArgs e)
         {
-            areLarvaDisabled = e.Value;
+            AreLarvaDisabled = e.Value;
         }
 
         private void WarpersToggleChangeEvent(ToggleChangedEventArgs e)
         {
-            areBleedersDisabled = e.Value;
+            AreBleedersDisabled = e.Value;
         }
 
         private void ReapersToggleChangeEvent(ToggleChangedEventArgs e)
         {
-            areReapersDisabled = e.Value;
+            AreReapersDisabled = e.Value;
         }
 
         private void SeaDragonsToggleChangeEvent(ToggleChangedEventArgs e)
         {
-            areSeaDragonsDisabled = e.Value;
+            AreSeaDragonsDisabled = e.Value;
         }
 
         private void GhostLeviathansToggleChangeEvent(ToggleChangedEventArgs e)
         {
-            areGhostLeviathansDisabled = e.Value;
+            AreGhostLeviathansDisabled = e.Value;
         }
 
         private void CrabsquidsToggleChangeEvent(ToggleChangedEventArgs e)
         {
-            areCrabsquidsDisabled = e.Value;
+            AreCrabsquidsDisabled = e.Value;
         }
     }
 }

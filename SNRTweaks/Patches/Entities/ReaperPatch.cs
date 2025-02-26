@@ -4,14 +4,14 @@ using UnityEngine;
 namespace SNRTweaks.Patches.Entities
 {
     [HarmonyPatch]
-    public class ReaperPatch
+    internal class ReaperPatch
     {
         [HarmonyPatch(typeof(Creature), nameof(Creature.Start)), HarmonyPrefix]
-        private static void ReaperLeviathanStart_Prefix(Creature __instance)
+        private static void ReaperLeviathanStart_Prefix(Creature instance)
         {
-            if (Plugin.Options.areReapersDisabled && __instance is ReaperLeviathan reaper)
+            if (Plugin.Options.AreReapersDisabled && instance is ReaperLeviathan reaper)
             {
-                GameObject.Destroy(reaper.gameObject);
+                Object.Destroy(reaper.gameObject);
             }
         }
     }

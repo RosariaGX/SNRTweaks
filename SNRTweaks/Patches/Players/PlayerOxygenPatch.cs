@@ -5,25 +5,25 @@ namespace SNRTweaks.Patches.Players
     [HarmonyPatch]
     internal class PlayerOxygenPatch
     {
-        private static float defaultOxygenAmount;
-        private static float newOxygenAmount;
+        private static float _defaultOxygenAmount;
+        private static float _newOxygenAmount;
         [HarmonyPatch(typeof(OxygenManager), nameof(OxygenManager.RemoveOxygen)), HarmonyPrefix] 
         private static void PlayerOnRemoveOxygen_Prefix()
         {
             var oxygenManager = Player.main?.GetComponent<OxygenManager>();
 
-            defaultOxygenAmount = Player.main.GetOxygenCapacity();
+            _defaultOxygenAmount = Player.main!.GetOxygenCapacity();
             bool wasOxygenCheatEnabled = false;
 
-            if (Plugin.Options.isNoOxygenToggled)
+            if (Plugin.Options.IsNoOxygenToggled)
             {
-                newOxygenAmount = oxygenManager.AddOxygen(oxygenManager.GetOxygenAvailable());
+                _newOxygenAmount = oxygenManager!.AddOxygen(oxygenManager.GetOxygenAvailable());
                 wasOxygenCheatEnabled = true;
             } else 
             { 
                 if (wasOxygenCheatEnabled)
                 {
-                    float diff = defaultOxygenAmount - newOxygenAmount;
+                    float diff = _defaultOxygenAmount - _newOxygenAmount;
                     oxygenManager.RemoveOxygen(diff);
                 } else { return; }
                 return;

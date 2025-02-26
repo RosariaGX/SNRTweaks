@@ -3,18 +3,18 @@
 namespace SNRTweaks.Patches.Utility
 {
     [HarmonyPatch]
-    public class LaserSpeedPatch
+    internal class LaserSpeedPatch
     {
-        private static float defaultWeldSpeed;
+        private static float _defaultWeldSpeed;
 
         [HarmonyPatch(typeof(LaserCutter), nameof(LaserCutter.OnToolUseAnim)), HarmonyPostfix]
-        private static void WelderOnToolUseAnim_Postfix(LaserCutter __instance) 
+        private static void WelderOnToolUseAnim_Postfix(LaserCutter instance) 
         { 
-            if (Plugin.Options.wasWelderSliderChanged)
+            if (Plugin.Options.WasWelderSliderChanged)
             {
-                defaultWeldSpeed = __instance.healthPerWeld;
+                _defaultWeldSpeed = instance.healthPerWeld;
 
-                __instance.healthPerWeld = defaultWeldSpeed * Plugin.Options.welderSpeedMultiplier;
+                instance.healthPerWeld = _defaultWeldSpeed * Plugin.Options.WelderSpeedMultiplier;
             }
         }
     }

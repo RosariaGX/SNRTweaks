@@ -4,14 +4,14 @@ using UnityEngine;
 namespace SNRTweaks.Patches.Entities
 {
     [HarmonyPatch]
-    public class GhostLeviathansPatch
+    internal class GhostLeviathansPatch
     {
         [HarmonyPatch(typeof(Creature), nameof(Creature.Start)), HarmonyPrefix]
-        private static void GhostLeviathanStart_Prefix(Creature __instance)
+        private static void GhostLeviathanStart_Prefix(Creature instance)
         {
-            if (Plugin.Options.areGhostLeviathansDisabled && __instance is GhostLeviathan ghostLeviathan)
+            if (Plugin.Options.AreGhostLeviathansDisabled && instance is GhostLeviathan ghostLeviathan)
             {
-                GameObject.Destroy(ghostLeviathan.gameObject);
+                Object.Destroy(ghostLeviathan.gameObject);
             }
         }
     }

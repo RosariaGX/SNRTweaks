@@ -4,14 +4,14 @@ using UnityEngine;
 namespace SNRTweaks.Patches.Entities
 {
     [HarmonyPatch]
-    public class CrabsquidPatch
+    internal class CrabsquidPatch
     {
         [HarmonyPatch(typeof(Creature), nameof(Creature.Start)), HarmonyPrefix]
-        private static void CrabSquidStart_Prefix(Creature __instance)
+        private static void CrabSquidStart_Prefix(Creature instance)
         {
-            if (Plugin.Options.areCrabsquidsDisabled && __instance is CrabSquid crabSquid)
+            if (Plugin.Options.AreCrabsquidsDisabled && instance is CrabSquid crabSquid)
             {
-                GameObject.Destroy(crabSquid.gameObject);
+                Object.Destroy(crabSquid.gameObject);
             }
         }
     }

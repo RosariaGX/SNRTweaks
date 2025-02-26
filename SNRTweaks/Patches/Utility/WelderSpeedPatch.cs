@@ -3,18 +3,18 @@
 namespace SNRTweaks.Patches.Utility
 {
     [HarmonyPatch]
-    public class WelderSpeedPatch
+    internal class WelderSpeedPatch
     {
-        private static float defaultWeldSpeed;
+        private static float _defaultWeldSpeed;
 
         [HarmonyPatch(typeof(Welder), nameof(Welder.OnToolUseAnim)), HarmonyPostfix]
-        private static void WelderOnToolUseAnim_Postfix(Welder __instance) 
+        private static void WelderOnToolUseAnim_Postfix(Welder instance) 
         { 
-            if (Plugin.Options.wasWelderSliderChanged)
+            if (Plugin.Options.WasWelderSliderChanged)
             {
-                defaultWeldSpeed = __instance.healthPerWeld;
+                _defaultWeldSpeed = instance.healthPerWeld;
 
-                __instance.healthPerWeld = defaultWeldSpeed * Plugin.Options.welderSpeedMultiplier;
+                instance.healthPerWeld = _defaultWeldSpeed * Plugin.Options.WelderSpeedMultiplier;
             }
         }
     }

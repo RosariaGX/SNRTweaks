@@ -3,18 +3,18 @@
 namespace SNRTweaks.Patches.Players
 {
     [HarmonyPatch]
-    public class PlayerSwimSpeedPatch
+    internal class PlayerSwimSpeedPatch
     {
-        public static float defaultSwimForwardSpeed;
-        public static float defaultSwimWaterAcceleration;
+        public static float DefaultSwimForwardSpeed;
+        public static float DefaultSwimWaterAcceleration;
         [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Start)), HarmonyPostfix]
-        private static void PlayerControllerStart_Postfix(PlayerController __instance)
+        private static void PlayerControllerStart_Postfix(PlayerController instance)
         {
-            defaultSwimForwardSpeed = __instance.swimForwardMaxSpeed;
-            defaultSwimWaterAcceleration = __instance.swimWaterAcceleration;
+            DefaultSwimForwardSpeed = instance.swimForwardMaxSpeed;
+            DefaultSwimWaterAcceleration = instance.swimWaterAcceleration;
 
-            __instance.swimForwardMaxSpeed = defaultSwimForwardSpeed * Plugin.Options.swimSpeedMultiplier;
-            __instance.swimWaterAcceleration = defaultSwimWaterAcceleration * Plugin.Options.swimSpeedMultiplier;
+            instance.swimForwardMaxSpeed = DefaultSwimForwardSpeed * Plugin.Options.SwimSpeedMultiplier;
+            instance.swimWaterAcceleration = DefaultSwimWaterAcceleration * Plugin.Options.SwimSpeedMultiplier;
             Player.main.UpdateMotorMode();
         }
 

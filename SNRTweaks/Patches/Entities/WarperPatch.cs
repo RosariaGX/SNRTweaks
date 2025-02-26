@@ -4,14 +4,14 @@ using UnityEngine;
 namespace SNRTweaks.Patches.Entities
 {
     [HarmonyPatch]
-    public class WarperPatch
+    internal class WarperPatch
     {
         [HarmonyPatch(typeof(WarperSpawner), nameof(WarperSpawner.OnEnable)), HarmonyPrefix]
-        private static void WarperSpawnerOnEnabled_Prefix(WarperSpawner __instance)
+        private static void WarperSpawnerOnEnabled_Prefix(WarperSpawner instance)
         {
-            if (Plugin.Options.areWarpersDisabled)
+            if (Plugin.Options.AreWarpersDisabled)
             {
-                GameObject.Destroy(__instance.gameObject);
+                Object.Destroy(instance.gameObject);
             }
         }
     }
