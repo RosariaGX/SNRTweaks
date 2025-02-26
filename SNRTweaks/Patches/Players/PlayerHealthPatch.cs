@@ -5,8 +5,8 @@ namespace SNRTweaks.Patches.Players
     [HarmonyPatch]
     internal class PlayerHealthPatch
     {
-        [HarmonyPatch(typeof(LiveMixin), nameof(LiveMixin.TakeDamage)), HarmonyPrefix] 
-        private static void PlayerTakeDamage_Prefix()
+        [HarmonyPatch(typeof(LiveMixin), nameof(LiveMixin.TakeDamage)), HarmonyPostfix] 
+        private static void PlayerTakeDamage_Postfix()
         {
             if (Plugin.Options.isHealthCheatToggled)
             {
