@@ -48,6 +48,9 @@ namespace SNRTweaks.Config
         [Toggle("Disable Bleeders", Tooltip = "This is an option to Enable or Disable all Bleeders from the game, You may need to reload save to take effect"), OnChange(nameof(BleedersToggleChangeEvent))]
         public bool areBleedersDisabled = false;
 
+        [Toggle("Disable Lava Larva", Tooltip = "This is an option to Enable or Disable all Lava Larva from the game, You may need to reload save to take effect"), OnChange(nameof(LarvaToggleChangeEvent))]
+        public bool areLarvaDisabled = false;
+
         [Toggle("Disable Warpers", Tooltip = "This is an option to Enable or Disable all Warpers from the game, You may need to reload save to take effect"), OnChange(nameof(WarpersToggleChangeEvent))]
         public bool areWarpersDisabled = false;
         
@@ -145,6 +148,11 @@ namespace SNRTweaks.Config
         private void BleedersToggleChangeEvent(ToggleChangedEventArgs e)
         {
             areBleedersDisabled = e.Value;
+        }
+
+        private void LarvaToggleChangeEvent(ToggleChangedEventArgs e)
+        {
+            areLarvaDisabled = e.Value;
         }
 
         private void WarpersToggleChangeEvent(ToggleChangedEventArgs e)
