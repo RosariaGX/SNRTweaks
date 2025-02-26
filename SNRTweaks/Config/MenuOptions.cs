@@ -39,6 +39,9 @@ namespace SNRTweaks.Config
         [Toggle("Oxygen Cheat", Tooltip = "This is an option to enable or disable the NoOxygen console command"), OnChange(nameof(OxygenCheatToggleChangeEvent))]
         public bool isNoOxygenToggled = false;
 
+        [Toggle("Health Cheat", Tooltip = "This is an option to enable or disable the taking damage, Please note that this DOESN'T prevent one shot kills e.g. Reapers eating you or getting killed by the Aurora explosion e.t.c"), OnChange(nameof(HealthCheatToggleChangeEvent))]
+        public bool isHealthCheatToggled = false;
+
         [Toggle("Disable Bleeders", Tooltip = "This is an option to Enable or Disable all Bleeders from the game, You may need to reload save to take effect"), OnChange(nameof(BleedersToggleChangeEvent))]
         public bool areBleedersDisabled = false;
 
@@ -124,6 +127,11 @@ namespace SNRTweaks.Config
         private void OxygenCheatToggleChangeEvent(ToggleChangedEventArgs e)
         {
             isNoOxygenToggled = e.Value;
+        }
+
+        private void HealthCheatToggleChangeEvent(ToggleChangedEventArgs e)
+        {
+            isHealthCheatToggled = e.Value;
         }
 
         private void BleedersToggleChangeEvent(ToggleChangedEventArgs e)
