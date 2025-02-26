@@ -36,6 +36,9 @@ namespace SNRTweaks.Config
         [Slider("Seamoth Speed Multiplier", 1.0f, 100.0f, DefaultValue = 1.0f, Format = "{0:F2}", Tooltip = "This is the amount that the Seamoth's speed will be multiplied by."), OnChange(nameof(SeamothSpeedSliderChangeEvent))]
         public float seamothSpeedMultiplier = 1.0f;
 
+        [Toggle("Oxygen Cheat", Tooltip = "This is an option to enable or disable the NoOxygen console command"), OnChange(nameof(OxygenCheatToggleChangeEvent))]
+        public bool isNoOxygenToggled = false;
+
         [Toggle("Disable Bleeders", Tooltip = "This is an option to Enable or Disable all Bleeders from the game, You may need to reload save to take effect"), OnChange(nameof(BleedersToggleChangeEvent))]
         public bool areBleedersDisabled = false;
 
@@ -116,6 +119,11 @@ namespace SNRTweaks.Config
         {
             seamothSpeedMultiplier = e.Value;
             wasSeamothSliderChanged = true;
+        }
+
+        private void OxygenCheatToggleChangeEvent(ToggleChangedEventArgs e)
+        {
+            isNoOxygenToggled = e.Value;
         }
 
         private void BleedersToggleChangeEvent(ToggleChangedEventArgs e)
